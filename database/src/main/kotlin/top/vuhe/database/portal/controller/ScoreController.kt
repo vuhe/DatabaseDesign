@@ -10,10 +10,9 @@ import top.vuhe.database.portal.service.intf.ScoreService
 
 @RestController
 @RequestMapping("/api/score")
-class ScoreController {
-    @Autowired
-    private lateinit var service: ScoreService
-
+class ScoreController(
+    @Autowired private val service: ScoreService
+) {
     /**
      * 按学号搜索成绩
      * 默认为全获取

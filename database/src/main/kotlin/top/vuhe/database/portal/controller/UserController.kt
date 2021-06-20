@@ -9,10 +9,9 @@ import top.vuhe.database.portal.service.intf.UserService
 
 @RestController
 @RequestMapping("/api")
-class UserController {
-    @Autowired
-    private lateinit var service: UserService
-
+class UserController(
+    @Autowired private val service: UserService
+) {
     /**
      * 登录
      *

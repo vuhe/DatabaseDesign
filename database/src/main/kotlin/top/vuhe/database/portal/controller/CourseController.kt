@@ -10,10 +10,9 @@ import top.vuhe.database.portal.service.intf.CourseService
 
 @RestController
 @RequestMapping("/api/course")
-class CourseController {
-    @Autowired
-    private lateinit var service: CourseService
-
+class CourseController(
+    @Autowired private val service: CourseService
+) {
     /**
      * 通过课程号搜索课程
      * 默认为全获取

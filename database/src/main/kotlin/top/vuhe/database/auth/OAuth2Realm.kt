@@ -11,10 +11,9 @@ import top.vuhe.database.entity.User
 import top.vuhe.database.portal.service.intf.UserService
 
 @Component
-class OAuth2Realm: AuthorizingRealm() {
-    @Autowired
-    private lateinit var userService: UserService
-
+class OAuth2Realm(
+    @Autowired private val userService: UserService
+) : AuthorizingRealm() {
     override fun supports(token: AuthenticationToken?): Boolean {
         return token is OAuth2Token
     }
@@ -22,7 +21,7 @@ class OAuth2Realm: AuthorizingRealm() {
     /**
      * 授权(验证权限时调用)
      */
-    override fun doGetAuthorizationInfo(principals: PrincipalCollection?): AuthorizationInfo? {
+    override fun doGetAuthorizationInfo(principals: PrincipalCollection?): AuthorizationInfo {
         val user = principals!!.primaryPrincipal as User
 
         //用户角色列表
@@ -41,7 +40,7 @@ class OAuth2Realm: AuthorizingRealm() {
      * 认证(登录时调用)
      */
     @Throws(AuthenticationException::class)
-    override fun doGetAuthenticationInfo(token: AuthenticationToken): AuthenticationInfo? {
+    override fun doGetAuthenticationInfo(token: AuthenticationToken): AuthenticationInfo {
         val accessToken = token.principal as String
 
         // 根据accessToken，查询用户

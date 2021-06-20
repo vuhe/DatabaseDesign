@@ -10,10 +10,9 @@ import top.vuhe.database.portal.service.intf.StudentService
 
 @RestController
 @RequestMapping("/api/student")
-class StudentController {
-    @Autowired
-    private lateinit var service: StudentService
-
+class StudentController(
+    @Autowired private val service: StudentService
+) {
     /**
      * 按学号搜索学生
      * 默认为全获取
